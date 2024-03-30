@@ -6,7 +6,40 @@ import (
 	// "strconv"
 )
 
-func capitalize(start, end int, file []byte) []byte { // this function receives the start and end point of the words and capitalizes them
+func Capitalize(start, end int, file string) string {
+	var result string
+	wordStart := true
+	for _, char := range file {
+		if (char >= 'a' && char <= 'z') || (char >= 'A' && char <= 'Z') || (char >= '0' && char <= '9') {
+			if wordStart {
+				if char >= 'a' && char <= 'z' {
+					result += string(char - 32)
+				} else {
+					result += string(char)
+				}
+				wordStart = false
+			} else {
+				if char >= 'A' && char <= 'Z' {
+					result += string(char + 32)
+				} else {
+					result += string(char)
+				}
+			}
+		} else {
+			if char >= 'A' && char <= 'Z' {
+				result += string(char + 32)
+			} else if char >= '0' && char <= '9' {
+				result += string(char)
+			} else {
+				wordStart = true
+				result += string(char)
+			}
+		}
+	}
+	return result
+}
+
+func to_upper(start, end int, file []byte) []byte { // this function receives the start and end point of the words and capitalizes them
 	i := start
 	for _, v := range file[start:end] {
 		if v >= 'a' && v <= 'z' {
@@ -139,7 +172,7 @@ func main() {
 				switch string(sample_data[i]) {
 				case "u":
 					end, start = if_words(i, string(sample_data))
-					sample_data = capitalize(start, end, sample_data)
+					sample_data = to_upper(start, end, sample_data)
 
 				case "l":
 					end, start = if_words(i, string(sample_data))
@@ -147,14 +180,17 @@ func main() {
 					fmt.Println(string(sample_data))
 
 				case "c":
+					end, start = if_words(i, string(sample_data))
+					sample_data = []byte(Capitalize(start, end, string(sample_data)))
+					fmt.Println(string(sample_data))
+
+				case "h":
 
 				}
-
 			}
-
 		}
 		// result_data := transfer(string(sample_data), result_data)
-		// fmt.Println(result_data)
+		fmt.Println(string(sample_data))
 	}
 }
 
