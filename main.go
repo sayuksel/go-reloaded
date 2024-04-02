@@ -3,10 +3,10 @@ package main
 import (
 	"fmt"
 	"os"
-	// "strconv"
+	"strconv"
 )
 
-func Capitalize(start, end int, file string) string {
+func Capitalize(start, end int, file string) string { // this function takes a string and capitalizes the first letter and makes other lowercase if not the first letter
 	var result string
 	wordStart := true
 	for _, char := range file {
@@ -51,7 +51,7 @@ func to_upper(start, end int, file []byte) []byte { // this function receives th
 
 }
 
-func to_lower(start, end int, file []byte) []byte {
+func to_lower(start, end int, file []byte) []byte { // this function receives the start and end point of the words and makes them lower case
 	i := start
 	for _, v := range file[start:end] {
 		if v >= 'A' && v <= 'Z' {
@@ -62,7 +62,7 @@ func to_lower(start, end int, file []byte) []byte {
 	return file
 }
 
-func transfer(sample_file string, result_file *os.File) *os.File {
+func transfer(sample_file string, result_file *os.File) *os.File { // this function will transfer the data from sample.txt to result.txt which will be outputted
 
 	flag := false
 
@@ -126,7 +126,7 @@ func prev_words(end, words int, file string) (int, int) { // this function will 
 	return end, start
 }
 
-func prev_word(end int, file string) (int, int) { // this function will give u the start and end valus of the word to be manipulated
+func prev_word(end int, file string) (int, int) { // this function will give u the start and end valus of the word to be manipulated if there is only one word
 	flag := false
 	start := end - 3
 	end -= 2
@@ -185,6 +185,24 @@ func main() {
 					fmt.Println(string(sample_data))
 
 				case "h":
+					end, start = prev_word(i, string(sample_data))
+					h_decimal := sample_data[start:end]
+					decimal, err := strconv.ParseInt(string(h_decimal), 16, 64)
+					if err != nil {
+						fmt.Println(err)
+					} else {
+						fmt.Println("Decimal :", decimal)
+					}
+
+				case "b":
+					end, start = prev_word(i, string(sample_data))
+					b_decimal := sample_data[start:end]
+					decimal, err := strconv.ParseInt(string(b_decimal), 2, 64)
+					if err != nil {
+						fmt.Println(err)
+					} else {
+						fmt.Println("Decimal :", decimal)
+					}
 
 				}
 			}
@@ -196,3 +214,7 @@ func main() {
 
 // end, start := prev_word(i, string(data))
 // fmt.Println(string(data[start:end]))
+
+// decimal, err := strconv.ParseInt(hexStr, 16, 64)
+//     if err != nil {
+//         fmt.Println("Error:", err)
