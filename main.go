@@ -228,3 +228,57 @@ func main() {
 // decimal, err := strconv.ParseInt(hexStr, 16, 64)
 //     if err != nil {
 //         fmt.Println("Error:", err)
+
+/* package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+)
+
+func main() {
+	sourceFileName := "source.txt"
+	destinationFileName := "destination.txt"
+
+	// Open the source file
+	sourceFile, err := os.Open(sourceFileName)
+	if err != nil {
+		fmt.Println("Error opening source file:", err)
+		return
+	}
+	defer sourceFile.Close()
+
+	// Create the destination file
+	destinationFile, err := os.Create(destinationFileName)
+	if err != nil {
+		fmt.Println("Error creating destination file:", err)
+		return
+	}
+	defer destinationFile.Close()
+
+	scanner := bufio.NewScanner(sourceFile)
+	for scanner.Scan() {
+		line := scanner.Text()
+		// Define your condition here. For example, transfer lines containing "important"
+		if containsImportantText(line) {
+			_, err := destinationFile.WriteString(line + "\n")
+			if err != nil {
+				fmt.Println("Error writing to destination file:", err)
+				return
+			}
+		}
+	}
+
+	if err := scanner.Err(); err != nil {
+		fmt.Println("Error reading source file:", err)
+	}
+}
+
+// containsImportantText checks if the given line contains the keyword "important".
+// Adjust this function to match your criteria.
+func containsImportantText(line string) bool {
+	return strings.Contains(line, "important")
+}
+
+*/
