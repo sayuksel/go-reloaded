@@ -29,10 +29,9 @@ func Puncts(s []string) []string {
 						}
 					}
 					if flag {
-						fmt.Printf("i is %v, and length of s is %v\n", i, len(s))
 						if i < len(s) {
 							s[i-1] = s[i-1] + w
-							s[i] = w[1:]
+							s[i] = v[1:]
 
 						}
 					}
@@ -41,8 +40,5 @@ func Puncts(s []string) []string {
 			}
 		}
 	}
-	//
 	return s
 }
-
-// make new slice and add only if len() != 0
