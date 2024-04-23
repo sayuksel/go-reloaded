@@ -11,9 +11,9 @@ func Puncts(s []string) []string {
 	for i, v := range s {
 		for _, w := range pun {
 			if len(v) > 0 {
-				if string(v[0]) == w { //if there is a punc in the first word
+				if string(v[0]) == w { // if there is a punc in the first word
 					for _, x := range pun {
-						if string(v[len(v)-1]) == x { //if there is a punc in the last word
+						if string(v[len(v)-1]) == x { // if there is a punc in the last word
 							if i == 0 {
 								fmt.Println("Error: There seems to be an error with the input text.")
 								os.Exit(0)
@@ -29,8 +29,12 @@ func Puncts(s []string) []string {
 						}
 					}
 					if flag {
-						s[i-1] = s[i-1] + w
-						s[i] = w[1:]
+						fmt.Printf("i is %v, and length of s is %v\n", i, len(s))
+						if i < len(s) {
+							s[i-1] = s[i-1] + w
+							s[i] = w[1:]
+
+						}
 					}
 					flag = true
 				}
@@ -40,3 +44,5 @@ func Puncts(s []string) []string {
 	//
 	return s
 }
+
+// make new slice and add only if len() != 0
